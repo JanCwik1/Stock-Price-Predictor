@@ -6,25 +6,25 @@ import numpy as np
 import pandas as pd
 
 # Define Ticker Symbol
-ticker = "AAPL"  # Replace with your desired stock ticker
+ticker = "AAPL"
 
 # Download data for a specific period
 data = yf.download(ticker, period="5y")
 
-# Select specific columns (e.g., Close price)
+# Select specific columns (Close price)
 data = data[["Close"]]
 
 # Create a new dataframe for features (predictors) and target (predicted value)
 features = pd.DataFrame()
 
-# You can add more features here based on technical indicators etc.
-# For this example, we'll use the previous day's closing price
+# Add more features here based on technical indicators
+# Using the previous day's closing price
 features["prev_day_close"] = data["Close"].shift(1)
 
 # Define the target variable (predict tomorrow's closing price)
 target = data["Close"]
 
-# Scale the features and target data (often required for machine learning models)
+# Scale the features and target data, since most ml models require this
 scaler = MinMaxScaler(feature_range=(0, 1))
 scaled_features = scaler.fit_transform(features)
 scaled_target = scaler.fit_transform(target.values.reshape(-1, 1))
