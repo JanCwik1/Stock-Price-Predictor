@@ -104,7 +104,7 @@ new_data_scaled = scaler.transform(new_data)
 # Predict the closing price for the next day (or any future date)
 lstm_predicted_price = lstm_model.predict(new_data_scaled)
 
-# Invert scaling for the predicted value
+# Inverted scaling for the predicted value
 lstm_predicted_price = scaler.inverse_transform(lstm_predicted_price.reshape(1, -1))
 print("Predicted Price:", lstm_predicted_price[0][0]) # Predicted Price: 182.6942 USD for day 08/05/2024
 
